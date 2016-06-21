@@ -8,7 +8,8 @@ const LONGITUDE = '30.523';
 const LANGUAGE = 'en';
 
 var options = {
-  language: LANGUAGE
+  language: LANGUAGE,
+  https: true,
 };
 
 function callback (error, result) {

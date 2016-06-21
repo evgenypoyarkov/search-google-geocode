@@ -5,6 +5,7 @@
 var request = require("request");
 var util = require("util");
 var _ = require('underscore');
+var url = require('url');
 
 var CommunicationError = require('./error');
 var config = require('./config.json');
@@ -109,7 +110,14 @@ Searcher.prototype._getUri = function () {
  * @access protected
  */
 Searcher.prototype._initUri = function () {
-  this.uri = config['uri'];
+  var options = this._getOptions();
+  var _uri = url.parse(config['uri']);
+
+  if (options && (options.key || options.https)) {
+    _uri.protocol = 'https:';
+  }
+
+  this.uri = url.format(_uri);
 };
 
 /**
